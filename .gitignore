@@ -211,3 +211,4 @@ data/*.npy
 data/images_cache/
 .python-version
 .python-version
+.venv/
