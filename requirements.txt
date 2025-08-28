@@ -8,3 +8,11 @@ matplotlib
 jupyter
 tqdm
 pytest
+
+
+# Othman Image embed model
+open-clip-torch
+faiss-cpu
+pillow
+requests
+tqdm
