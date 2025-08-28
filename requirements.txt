@@ -1,0 +1,10 @@
+torch
+torchvision
+sentence-transformers
+scikit-learn
+pandas
+numpy
+matplotlib
+jupyter
+tqdm
+pytest
