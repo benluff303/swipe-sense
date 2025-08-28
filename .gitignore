@@ -1,11 +1,21 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
-*.py[codz]
-*$py.class
+*.pyc
+.ipynb_checkpoints/
 
-# C extensions
-*.so
+# Artifacts & caches
+artifacts/
+images_cache/
+.cache/
+*.npy
+faiss_*.index
+photo_meta.csv
+gallery_manifest.csv
 
+# creds
+.env
+*.json
+.venv/
 # Distribution / packaging
 .Python
 build/
