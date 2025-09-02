@@ -9,7 +9,7 @@ import numpy as np
 import torch
 from transformers import CLIPProcessor, CLIPModel
 
-from config import MODEL_ID, EMB_DIR
+from config import MODEL_ID, EMB_DIR, MAX_IMAGES
 from utils import l2_normalize
 from storage_io import load_image_any
 
@@ -92,9 +92,9 @@ def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, 
     Load embeddings if cache matches fingerprint; otherwise compute and save.
     Returns (E, loaded_from_cache).
     """
-    E_PATH = EMB_DIR / "E_fp32.npy"
-    P_PATH = EMB_DIR / "paths.npy"
-    M_PATH = EMB_DIR / "meta.json"
+    E_PATH = EMB_DIR / "embed_array_20k.npy"
+    P_PATH = EMB_DIR / "paths20k.npy"
+    M_PATH = EMB_DIR / "meta500.json"
     print(E_PATH)
     print(P_PATH)
     print(M_PATH)
@@ -110,22 +110,24 @@ def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, 
         print(meta_f)
         if meta_f.get("model") == fingerprint.get("model") and meta_f.get("use_gcs") == fingerprint.get("use_gcs"):
             E = load_numpy(E_PATH)
-            p = np.load(P_PATH, allow_pickle=True).tolist()
+            p = np.load(P_PATH, allow_pickle=True).tolist()[:MAX_IMAGES] #human MAX_IMAGES
             print("step 2, hopefully now loading from cache")
             print(len(paths))
             print(len(p))
-            # print(paths)
-            # print(p)
+            print(paths)
+            print(p)
             if len(p) == len(paths) and p == paths:
                 print("[embeddings] Loaded embeddings from cache. (not scratch)")
                 return E.astype(np.float32), True
 
     # Compute fresh
-    print("[embeddings] Computing embeddings from scratch…")
+    # print("[embeddings] Computing embeddings from scratch…")
     # E = encode_all(paths, batch_size=32).astype(np.float32)
     # save_numpy(E_PATH, E)
     # np.save(P_PATH, np.array(paths, dtype=object))
     # save_fingerprint(M_PATH, fingerprint)
     # print("[embeddings] Saved embeddings to", EMB_DIR)
-    # return None
-    return E, False
+    print("[embeddings] !! Computing embeddings from scratch…")
+
+    return None
+    # return E, False

@@ -115,6 +115,7 @@ def startup_event():
     print(f"[startup] Found images: {len(paths)}")
 
     # 2) Inspect (quality quick features & duplicates)
+    #each meta is of type ImageMeta, made in utils.py
     meta = inspect_images(paths)
     # reorder paths according to items we could inspect (drop failures)
     idx_map = {m.path: i for i, m in enumerate(meta)}
@@ -130,12 +131,16 @@ def startup_event():
     print(f"[startup] E shape: {E.shape}")
 
     # 4) Quality: quick features + quality scores
+    print("image quality scores start")
     qf = build_or_load_qf_meta(paths)
     Q_NORM = quality_scores_from_qf(qf)
+    print("image quality scores end")
 
     # 5) Semantic gates
+    print("negative embeddings start")
     neg_emb = build_or_load_neg_emb()
     pos_places, neg_places = build_or_load_places_emb()
+    print("negative embeddings end")
 
     # 6) Build quality mask
     mask = compute_quality_mask_v2(
@@ -241,3 +246,6 @@ def stats():
     }
 
 print('end of file app.py')
+print("running startup method manually: startup_event()")
+
+startup_event()

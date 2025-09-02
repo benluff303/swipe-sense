@@ -15,7 +15,8 @@ GCS_PREFIX = ""                      # optional subfolder in the bucket
 LOCAL_DIRS = [Path.cwd() / "images", Path.cwd() / "data", Path.cwd()]
 
 # Limit dataset size for speed during dev
-MAX_IMAGES: int | None = 100
+# MAX_IMAGES: int | None = 100
+MAX_IMAGES: int | None = 500
 
 # Reproducibility
 SEED: int = 123
@@ -28,8 +29,8 @@ STATE_DIR = Path("./session_state"); STATE_DIR.mkdir(exist_ok=True)
 USER_DB_PATH = STATE_DIR / "users.json"
 
 # Whether to mirror local artifacts to GCS (if creds available)
-MIRROR_TO_GCS: bool = False
-ARTIFACTS_PREFIX: str = "artifacts/"      # subfolder in bucket
+MIRROR_TO_GCS: bool = True
+ARTIFACTS_PREFIX: str = f"artifacts_{str(MAX_IMAGES)}/"      # subfolder in bucket
 
 # -----------------------
 # Model settings
