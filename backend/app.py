@@ -104,66 +104,85 @@ def startup_event():
     # 1) Discover dataset
     if USE_GCS:
         paths = list_gcs_images(GCS_BUCKET, GCS_PREFIX, limit=None)
-        # print("found images:", paths) #human
+        print(f"loaded {len(paths)} image paths from bucket") #human
     else:
         paths = list_local_images(LOCAL_DIRS, limit=None)
 
-    random.shuffle(paths)
+    #human - commented out the below which was causing issies with path ordering
+    # random.shuffle(paths)
     if MAX_IMAGES is not None and len(paths) > MAX_IMAGES:
+        print("cutting down to MAX_IMAGES", MAX_IMAGES) #human
         paths = paths[:MAX_IMAGES]
     assert len(paths) > 0, "No images found. Check bucket/prefix or local dirs."
     print(f"[startup] Found images: {len(paths)}")
 
     # 2) Inspect (quality quick features & duplicates)
     #each meta is of type ImageMeta, made in utils.py
-    meta = inspect_images(paths)
-    # reorder paths according to items we could inspect (drop failures)
-    idx_map = {m.path: i for i, m in enumerate(meta)}
-    paths = [m.path for m in meta]
-    ahash_groups = build_ahash_groups(meta)
-    print(f"[startup] Inspected: {len(meta)}")
+    # meta = inspect_images(paths)
+    # # reorder paths according to items we could inspect (drop failures)
+    # print("building idx map and paths list from meta")
+    # idx_map = {m.path: i for i, m in enumerate(meta)}
+    # paths = [m.path for m in meta]
+    # ahash_groups = build_ahash_groups(meta)
+    # print(f"[startup] Inspected: {len(meta)}")
 
     # 3) Embeddings: load or compute
+    #human -> fingerprint unused, leaving in to avoid refactor
     fingerprint = {"model": MODEL_ID, "use_gcs": USE_GCS, "bucket": GCS_BUCKET if USE_GCS else None, "prefix": GCS_PREFIX if USE_GCS else None, "count": len(paths)}
+    print("loading or computing embeddings")
     E, loaded = load_or_compute_E(paths, fingerprint)
     E = l2_normalize(E, axis=1).astype(np.float32)
     N, D = E.shape
     print(f"[startup] E shape: {E.shape}")
 
-    # 4) Quality: quick features + quality scores
-    print("image quality scores start")
-    qf = build_or_load_qf_meta(paths)
-    Q_NORM = quality_scores_from_qf(qf)
-    print("image quality scores end")
+    # # 4) Quality: quick features + quality scores
+    # print("image quality scores start")
+    # qf = build_or_load_qf_meta(paths)
+    # Q_NORM = quality_scores_from_qf(qf)
+    # print("image quality scores end")
 
-    # 5) Semantic gates
-    print("negative embeddings start")
-    neg_emb = build_or_load_neg_emb()
-    pos_places, neg_places = build_or_load_places_emb()
-    print("negative embeddings end")
+    # # 5) Semantic gates
+    # print("negative embeddings start")
+    # neg_emb = build_or_load_neg_emb()
+    # pos_places, neg_places = build_or_load_places_emb()
+    # print("negative embeddings end")
 
-    # 6) Build quality mask
-    mask = compute_quality_mask_v2(
-        E, qf,
-        use_negative_semantics=USE_NEG_SEM_DEFAULT,
-        weird_thresh=WEIRD_THRESH_DEFAULT,
-        min_edge=MIN_EDGE_DEFAULT, min_w=MIN_W_DEFAULT, min_h=MIN_H_DEFAULT,
-        detect_zoom=DETECT_ZOOM_DEFAULT, zoom_center_ratio=ZOOM_CENTER_RATIO_DEFAULT,
-        detect_cutout=DETECT_CUTOUT_DEFAULT, solid_bg_frac=SOLID_BG_FRAC_DEFAULT, alpha_frac=ALPHA_FRAC_DEFAULT,
-        neg_txt_emb=neg_emb
-    )
-    if PLACES_ONLY_DEFAULT:
-        ps = place_scores(E, pos_places, neg_places)
-        mask &= (ps >= PLACE_MIN_DEFAULT)
+    # # 6) Build quality mask
+    # mask = compute_quality_mask_v2(
+    #     E, qf,
+    #     use_negative_semantics=USE_NEG_SEM_DEFAULT,
+    #     weird_thresh=WEIRD_THRESH_DEFAULT,
+    #     min_edge=MIN_EDGE_DEFAULT, min_w=MIN_W_DEFAULT, min_h=MIN_H_DEFAULT,
+    #     detect_zoom=DETECT_ZOOM_DEFAULT, zoom_center_ratio=ZOOM_CENTER_RATIO_DEFAULT,
+    #     detect_cutout=DETECT_CUTOUT_DEFAULT, solid_bg_frac=SOLID_BG_FRAC_DEFAULT, alpha_frac=ALPHA_FRAC_DEFAULT,
+    #     neg_txt_emb=neg_emb
+    # )
+
+    # if PLACES_ONLY_DEFAULT:
+    #     ps = place_scores(E, pos_places, neg_places)
+    #     mask &= (ps >= PLACE_MIN_DEFAULT)
 
     # 7) Recommender
+    # rec = ImageRecommender(
+    #     E, quality_mask=mask, quality_scores=Q_NORM, ahash_groups=ahash_groups,
+    #     alpha=ALPHA_DEFAULT, eta=ETA_INIT_DEFAULT, warmup_n=5,
+    #     recent_k=RECENT_K_DEFAULT, recent_weight=RECENT_W_DEFAULT,
+    #     focus_gamma=FOCUS_GAMMA_DEFAULT, diversity_last_k=DIVERSITY_LAST_K_DEFAULT, diversity_min_cos=DIVERSITY_MIN_COS_DEFAULT,
+    #     hide_exact_dupes=HIDE_EXACT_DUPES_DEFAULT
+    # )
+    #trying without quality mask/ ahash groups
+    #setting quility mask, scores, ahash group + hide exact dupes to None
     rec = ImageRecommender(
-        E, quality_mask=mask, quality_scores=Q_NORM, ahash_groups=ahash_groups,
+        E, quality_mask=None,
+        quality_scores=None,
+        ahash_groups=None,
         alpha=ALPHA_DEFAULT, eta=ETA_INIT_DEFAULT, warmup_n=5,
         recent_k=RECENT_K_DEFAULT, recent_weight=RECENT_W_DEFAULT,
         focus_gamma=FOCUS_GAMMA_DEFAULT, diversity_last_k=DIVERSITY_LAST_K_DEFAULT, diversity_min_cos=DIVERSITY_MIN_COS_DEFAULT,
-        hide_exact_dupes=HIDE_EXACT_DUPES_DEFAULT
+        hide_exact_dupes=None
     )
+
+
     # Decay setup
     rec.eta0 = ETA_INIT_DEFAULT; rec.eta_min = ETA_MIN_DEFAULT; rec.eta_decay_span = ETA_DECAY_SPAN_DEFAULT; rec.use_decay = USE_DECAY_DEFAULT
 
@@ -245,7 +264,9 @@ def stats():
         "seen": int(len(rec.seen)) if rec else 0,
     }
 
-print('end of file app.py')
-print("running startup method manually: startup_event()")
 
-startup_event()
+if __name__ == "__main__":
+    print("running startup_event() manually: ")
+    startup_event()
+
+print('end of file app.py')

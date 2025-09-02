@@ -36,6 +36,7 @@ def _ahash(im: Image.Image, size=8) -> int:
     return int(h)
 
 def inspect_images(paths: List[str]) -> List[ImageMeta]:
+    print("inspecting images", len(paths))
     out: list[ImageMeta] = []
     for p in paths:
         try:
@@ -48,6 +49,7 @@ def inspect_images(paths: List[str]) -> List[ImageMeta]:
 
 def build_ahash_groups(meta: List[ImageMeta]) -> Dict[int, set[int]]:
     """Group near-exact duplicates by a-hash; return index->set(group) map."""
+    print("building ahash groups", len(meta))
     from collections import defaultdict
     hash2idxs: Dict[int, List[int]] = defaultdict(list)
     for i, m in enumerate(meta):

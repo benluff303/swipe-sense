@@ -15,14 +15,14 @@ GCS_PREFIX = ""                      # optional subfolder in the bucket
 LOCAL_DIRS = [Path.cwd() / "images", Path.cwd() / "data", Path.cwd()]
 
 # Limit dataset size for speed during dev
-# MAX_IMAGES: int | None = 100
-MAX_IMAGES: int | None = 500
+MAX_IMAGES: int | None = 100
+MAX_IMAGES: int | None = 20888
 
 # Reproducibility
 SEED: int = 123
 
 # Artifacts & persistence paths
-EMB_DIR = Path("./emb_cache"); EMB_DIR.mkdir(exist_ok=True)
+EMB_DIR = Path("./emb_cache_20k"); EMB_DIR.mkdir(exist_ok=True)
 STATE_DIR = Path("./session_state"); STATE_DIR.mkdir(exist_ok=True)
 
 # User DB file (accumulated long-term profile)

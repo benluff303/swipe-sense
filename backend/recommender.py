@@ -49,6 +49,10 @@ class ImageRecommender:
         self._warm_order = self.rng.permutation(self.N); self._warm_ptr = 0
         self._updates_total = 0; self._eta_updates = 0
 
+    #human louis added
+    def get_user_profile(self) -> np.ndarray:
+        return self.preference
+
     # --- setters ---
     def set_quality_mask(self, mask: np.ndarray):
         self.quality_mask = mask
@@ -127,7 +131,7 @@ class ImageRecommender:
             return (idx, None) if idx is not None else (None, None)
 
         sims = self.E @ self.preference
-        mask = self._mask_candidates()
+        mask = self._mask_candidates() #quality mask used here
         sims = np.where(mask, sims, -np.inf)
         k = min(pool_k, np.isfinite(sims).sum())
         if k <= 0:
@@ -143,7 +147,8 @@ class ImageRecommender:
                 pool = np.argpartition(-sims, range(k))[:k]
 
         if not len(self._last_shown):
-            j = int(pool[np.argmax(sims[pool])]); return j, float(sims[j])
+            j = int(pool[np.argmax(sims[pool])])
+            return j, float(sims[j])
 
         sim_to_sel = self.E[pool] @ self.E[list(self._last_shown)].T
         novelty = 1.0 - sim_to_sel.max(axis=1)  # higher = more different
@@ -151,5 +156,6 @@ class ImageRecommender:
         pref_part = sims[pool]
 
         score = (1.0 - lambda_div) * pref_part + lambda_div * novelty + float(quality_boost) * q
-        j_local = int(np.argmax(score)); j = int(pool[j_local])
+        j_local = int(np.argmax(score));
+        j = int(pool[j_local])
         return j, float(sims[j])
