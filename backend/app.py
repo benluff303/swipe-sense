@@ -92,6 +92,23 @@ def load_user_profile_into_rec(user_id: str):
         base = rec.E.mean(axis=0) + np.random.default_rng(42).normal(0.0, 0.05, size=rec.D)
         rec.preference = l2_normalize(base).astype(np.float32)
 
+#louis
+def get_user_preference_from_db(user_id: str):
+    """Get the current user profile from the recommender (if any).
+        returns a numpy array or None if no profile found.
+    """
+    global rec, user_db
+    if rec is None:
+        print("rec is None")
+        return None
+    ent = user_db.get(user_id, {})
+    s = np.array(ent.get("accum_sum", []), dtype=np.float32)
+    w = float(ent.get("accum_weight", 0.0))
+    if s.size == rec.D and w > 0:
+        pref = l2_normalize(s / max(w, 1e-9))
+        return pref
+    return None
+
 # ---------------------------
 # Startup: build the batch pipeline
 # ---------------------------
@@ -264,6 +281,26 @@ def stats():
         "seen": int(len(rec.seen)) if rec else 0,
     }
 
+#human louis added
+@app.get("/user_profile/{user_id}")
+def get_user_profile(user_id: str, save=True):
+    """
+        saves user profile to a numpy file if save=True
+        can load this profile for next steps
+    """
+    print("Getting user preference for user_id:", user_id)
+    user_prefs = get_user_preference_from_db(user_id)
+    print("User prefs type:", type(user_prefs))
+    print("User prefs:", user_prefs)
+    if user_prefs is not None:
+        if save:
+            save_path = f"session_state/user_prefs_{user_id}.npy"
+            print("Saving user preferences to file:", save_path)
+            np.save(save_path, user_prefs)
+
+        return {"status": "ok", "preference": user_prefs.tolist()}
+    else:
+        return {"status": "no_profile", "preference": None}
 
 if __name__ == "__main__":
     print("running startup_event() manually: ")

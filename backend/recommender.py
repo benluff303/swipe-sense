@@ -50,8 +50,8 @@ class ImageRecommender:
         self._updates_total = 0; self._eta_updates = 0
 
     #human louis added
-    def get_user_profile(self) -> np.ndarray:
-        return self.preference
+    # def get_user_profile(self) -> np.ndarray:
+    #     return self.preference
 
     # --- setters ---
     def set_quality_mask(self, mask: np.ndarray):
