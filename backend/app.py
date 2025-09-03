@@ -11,7 +11,7 @@ from PIL import Image
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
 
-from config import (
+from backend.config import (
     USE_GCS, GCS_BUCKET, GCS_PREFIX, LOCAL_DIRS, MAX_IMAGES, SEED,
     USER_DB_PATH,
     MODEL_ID,
@@ -25,16 +25,16 @@ from config import (
     DIVERSITY_LAST_K_DEFAULT, DIVERSITY_MIN_COS_DEFAULT, HIDE_EXACT_DUPES_DEFAULT,
     POOL_K_DEFAULT, LAMBDA_DIV_DEFAULT, NEAR_DUPE_THR_DEFAULT, QUALITY_BOOST_DEFAULT,
 )
-from storage_io import list_gcs_images, list_local_images, load_image_any
-from embeddings import load_or_compute_E
-from recommender import ImageRecommender
-from quality import (
+from backend.storage_io import list_gcs_images, list_local_images, load_image_any
+from backend.embeddings import load_or_compute_E
+from backend.recommender import ImageRecommender
+from backend.quality import (
     inspect_images, build_ahash_groups,
     build_or_load_qf_meta, quality_scores_from_qf,
     build_or_load_neg_emb, build_or_load_places_emb,
     compute_quality_mask_v2, place_scores
 )
-from utils import l2_normalize
+from backend.utils import l2_normalize
 
 # ---------------------------
 # Global runtime state
