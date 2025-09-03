@@ -18,33 +18,78 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 processor = CLIPProcessor.from_pretrained(MODEL_ID, use_fast=False)
 model = CLIPModel.from_pretrained(MODEL_ID).to(device)
 model.eval()
-
 # -------- Image embeddings --------
-def get_image_features_batch(batch_imgs: List) -> np.ndarray:
-    inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
-    with torch.no_grad():
-        emb = model.get_image_features(**inputs).float()
-    emb = emb.cpu().numpy()
-    return l2_normalize(emb, axis=1).astype(np.float32)
+import gc
+import torch
 
-def encode_all(paths: List[str], batch_size: int = 32) -> np.ndarray:
-    """Compute CLIP embeddings for all image paths. Returns (N, D) float32, L2-normalized."""
-    E_parts: list[np.ndarray] = []
-    batch: list = []
-    for i, p in enumerate(paths, 1):
+def get_image_features_batch(batch_imgs: List) -> np.ndarray:
+    """
+    OOM-safe: يحاول على الـ GPU، وإذا حصل out-of-memory يرجع يحسب نفس الدفعة على CPU.
+    """
+    out = None
+    try:
+        inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
+        with torch.no_grad():
+            emb = model.get_image_features(**inputs).float()
+        out = emb.cpu().numpy()
+    except RuntimeError as e:
+        msg = str(e).lower()
+        if "out of memory" in msg and device == "cuda":
+            # فضي الـ VRAM وجرب على CPU لنفس الدفعة
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
+            cpu_inputs = processor(images=batch_imgs, return_tensors="pt", padding=True)  # لا .to(device)
+            with torch.no_grad():
+                emb = model.get_image_features(**cpu_inputs).float()
+            out = emb.cpu().numpy()
+        else:
+            raise
+    finally:
         try:
-            batch.append(load_image_any(p))
+            del inputs
         except Exception:
-            # fallback black image if unreadable
-            import PIL.Image as PILI
-            batch.append(PILI.new("RGB", (224, 224), (0, 0, 0)))
-        if len(batch) == batch_size or i == len(paths):
-            E_parts.append(get_image_features_batch(batch))
-            batch.clear()
-        if i % 200 == 0:
-            print(f"[embeddings] encoded {i}/{len(paths)}")
-    E = np.vstack(E_parts).astype(np.float32)
-    return l2_normalize(E, axis=1)
+            pass
+        try:
+            del cpu_inputs
+        except Exception:
+            pass
+        if device == "cuda":
+            try:
+                torch.cuda.empty_cache()
+            except Exception:
+                pass
+        gc.collect()
+
+    return l2_normalize(out, axis=1).astype(np.float32)
+### Othman Uppdate
+# # -------- Image embeddings --------
+# def get_image_features_batch(batch_imgs: List) -> np.ndarray:
+#     inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
+#     with torch.no_grad():
+#         emb = model.get_image_features(**inputs).float()
+#     emb = emb.cpu().numpy()
+#     return l2_normalize(emb, axis=1).astype(np.float32)
+
+# def encode_all(paths: List[str], batch_size: int = 32) -> np.ndarray:
+#     """Compute CLIP embeddings for all image paths. Returns (N, D) float32, L2-normalized."""
+#     E_parts: list[np.ndarray] = []
+#     batch: list = []
+#     for i, p in enumerate(paths, 1):
+#         try:
+#             batch.append(load_image_any(p))
+#         except Exception:
+#             # fallback black image if unreadable
+#             import PIL.Image as PILI
+#             batch.append(PILI.new("RGB", (224, 224), (0, 0, 0)))
+#         if len(batch) == batch_size or i == len(paths):
+#             E_parts.append(get_image_features_batch(batch))
+#             batch.clear()
+#         if i % 200 == 0:
+#             print(f"[embeddings] encoded {i}/{len(paths)}")
+#     E = np.vstack(E_parts).astype(np.float32)
+#     return l2_normalize(E, axis=1)
 
 # -------- Text embeddings --------
 def embed_text_templates(labels: List[str], templates: List[str]) -> np.ndarray:
@@ -87,47 +132,124 @@ def load_fingerprint(meta_path: Path) -> dict | None:
     except Exception:
         return None
 
+
+# embeddings.py
+def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, bool]:
+    E_PATH = EMB_DIR / "E_fp32.npy"
+    P_PATH = EMB_DIR / "paths.npy"
+    M_PATH = EMB_DIR / "meta.json"
+
+    # حاول التحميل من الكاش
+    if E_PATH.exists() and P_PATH.exists() and M_PATH.exists():
+        meta_f = load_fingerprint(M_PATH) or {}
+        same_source = (
+            meta_f.get("model")  == fingerprint.get("model") and
+            meta_f.get("use_gcs")== fingerprint.get("use_gcs") and
+            meta_f.get("bucket") == fingerprint.get("bucket") and
+            meta_f.get("prefix") == fingerprint.get("prefix") and
+            meta_f.get("count")  == len(paths)
+        )
+        if same_source:
+            p = np.load(P_PATH, allow_pickle=True).tolist()
+            if p == paths:
+                E = load_numpy(E_PATH).astype(np.float32)
+                return l2_normalize(E, axis=1), True
+
+    # احسب من الصفر
+    print("[embeddings] Computing embeddings from scratch…")
+    E = encode_all(paths, batch_size=32).astype(np.float32)
+    save_numpy(E_PATH, E)
+    np.save(P_PATH, np.array(paths, dtype=object))
+    save_fingerprint(M_PATH, fingerprint)
+    print("[embeddings] Saved embeddings to", EMB_DIR)
+    return l2_normalize(E, axis=1), False
+
+
+### Othman update
+
 def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, bool]:
     """
     Load embeddings if cache matches fingerprint; otherwise compute and save.
     Returns (E, loaded_from_cache).
     """
-    E_PATH = EMB_DIR / "embed_array_20k.npy"
-    P_PATH = EMB_DIR / "paths20k.npy"
-    M_PATH = EMB_DIR / "meta500.json"
-    print(E_PATH)
-    print(P_PATH)
-    print(M_PATH)
+    # أسماء كاش بسيطة وثابتة
+    E_PATH = EMB_DIR / "E_fp32.npy"
+    P_PATH = EMB_DIR / "paths.npy"
+    M_PATH = EMB_DIR / "meta.json"
 
-    #louis hunch
-    # E = load_numpy(E_PATH)
-    # return E, False
-
-    # Try load
+    # حاول التحميل من الكاش
     if E_PATH.exists() and P_PATH.exists() and M_PATH.exists():
-        print("step 1")
         meta_f = load_fingerprint(M_PATH) or {}
-        print(meta_f)
-        if meta_f.get("model") == fingerprint.get("model") and meta_f.get("use_gcs") == fingerprint.get("use_gcs"):
-            E = load_numpy(E_PATH)
-            p = np.load(P_PATH, allow_pickle=True).tolist()[:MAX_IMAGES] #human MAX_IMAGES
-            print("step 2, hopefully now loading from cache")
-            print(len(paths))
-            print(len(p))
-            print(paths)
-            print(p)
-            if len(p) == len(paths) and p == paths:
-                print("[embeddings] Loaded embeddings from cache. (not scratch)")
-                return E.astype(np.float32), True
+        same_source = (
+            meta_f.get("model")  == fingerprint.get("model") and
+            meta_f.get("use_gcs")== fingerprint.get("use_gcs") and
+            meta_f.get("bucket") == fingerprint.get("bucket") and
+            meta_f.get("prefix") == fingerprint.get("prefix") and
+            meta_f.get("count")  == len(paths)
+        )
+        if same_source:
+            p_cached = np.load(P_PATH, allow_pickle=True).tolist()   # لا تقص paths هنا
+            if p_cached == paths:
+                E_cached = load_numpy(E_PATH).astype(np.float32)
+                return l2_normalize(E_cached, axis=1), True
 
-    # Compute fresh
-    # print("[embeddings] Computing embeddings from scratch…")
-    # E = encode_all(paths, batch_size=32).astype(np.float32)
-    # save_numpy(E_PATH, E)
-    # np.save(P_PATH, np.array(paths, dtype=object))
-    # save_fingerprint(M_PATH, fingerprint)
-    # print("[embeddings] Saved embeddings to", EMB_DIR)
-    print("[embeddings] !! Computing embeddings from scratch…")
+    # احسب من الصفر واحفظ
+    print("[embeddings] Computing embeddings from scratch…")
+    E = encode_all(paths, batch_size=32).astype(np.float32)
+    save_numpy(E_PATH, E)
+    np.save(P_PATH, np.array(paths, dtype=object))
+    save_fingerprint(M_PATH, fingerprint)
+    print("[embeddings] Saved embeddings to", EMB_DIR)
 
-    return None
-    # return E, False
+    return l2_normalize(E, axis=1), False
+
+
+
+
+
+
+
+# def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, bool]:
+#     """
+#     Load embeddings if cache matches fingerprint; otherwise compute and save.
+#     Returns (E, loaded_from_cache).
+#     """
+#     E_PATH = EMB_DIR / "embed_array_20k.npy"
+#     P_PATH = EMB_DIR / "paths20k.npy"
+#     M_PATH = EMB_DIR / "meta500.json"
+#     print(E_PATH)
+#     print(P_PATH)
+#     print(M_PATH)
+
+#     #louis hunch
+#     # E = load_numpy(E_PATH)
+#     # return E, False
+
+#     # Try load
+#     if E_PATH.exists() and P_PATH.exists() and M_PATH.exists():
+#         print("step 1")
+#         meta_f = load_fingerprint(M_PATH) or {}
+#         print(meta_f)
+#         if meta_f.get("model") == fingerprint.get("model") and meta_f.get("use_gcs") == fingerprint.get("use_gcs"):
+#             E = load_numpy(E_PATH)
+#             p = np.load(P_PATH, allow_pickle=True).tolist()[:MAX_IMAGES] #human MAX_IMAGES
+#             print("step 2, hopefully now loading from cache")
+#             print(len(paths))
+#             print(len(p))
+#             print(paths)
+#             print(p)
+#             if len(p) == len(paths) and p == paths:
+#                 print("[embeddings] Loaded embeddings from cache. (not scratch)")
+#                 return E.astype(np.float32), True
+
+#     # Compute fresh
+#     # print("[embeddings] Computing embeddings from scratch…")
+#     # E = encode_all(paths, batch_size=32).astype(np.float32)
+#     # save_numpy(E_PATH, E)
+#     # np.save(P_PATH, np.array(paths, dtype=object))
+#     # save_fingerprint(M_PATH, fingerprint)
+#     # print("[embeddings] Saved embeddings to", EMB_DIR)
+#     print("[embeddings] !! Computing embeddings from scratch…")
+
+#     return None
+#     # return E, False
