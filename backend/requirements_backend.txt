@@ -1,0 +1,25 @@
+torch
+torchvision
+sentence-transformers
+scikit-learn
+pandas
+numpy
+matplotlib
+jupyter
+tqdm
+pytest
+
+
+# Othman Image embed model
+open-clip-torch
+faiss-cpu
+pillow
+requests
+tqdm
+
+#backend requirements
+fastapi
+streamlit
+uvicorn
+#?
+gcsfs
