@@ -13,7 +13,7 @@ from pydantic import BaseModel
 
 from config import (
     USE_GCS, GCS_BUCKET, GCS_PREFIX, LOCAL_DIRS, MAX_IMAGES, SEED,
-    USER_DB_PATH,
+    USER_DB_PATH, STATE_DIR,
     MODEL_ID,
     MIN_EDGE_DEFAULT, MIN_W_DEFAULT, MIN_H_DEFAULT,
     DETECT_ZOOM_DEFAULT, ZOOM_CENTER_RATIO_DEFAULT,
@@ -35,6 +35,9 @@ from quality import (
     compute_quality_mask_v2, place_scores
 )
 from utils import l2_normalize
+
+from keywords_topk import topk_phrases_for_user
+from location_ranker import rank_locations_for_phrases
 
 # ---------------------------
 # Global runtime state
@@ -294,7 +297,8 @@ def get_user_profile(user_id: str, save=True):
     print("User prefs:", user_prefs)
     if user_prefs is not None:
         if save:
-            save_path = f"/users/user_prefs_{user_id}.npy"
+            user_filename = f"user_prefs_{user_id}.npy"
+            save_path = STATE_DIR / user_filename
             print("Saving user preferences to file:", save_path)
             np.save(save_path, user_prefs)
 
@@ -303,15 +307,25 @@ def get_user_profile(user_id: str, save=True):
         return {"status": "no_profile", "preference": None}
 
 
-from keywords_topk import topk_phrases_for_user
-from location_ranker import rank_locations_for_phrases
 
 
-@app.get("/user_to_keywords/")
-def run_flow_from_user_vector():
+@app.get("/user_to_keywords/{user_id}")
+def run_flow_from_user_vector(use_local_npy = False, user_id="louis"):
+    print("running user vector flow with user:", user_id)
     #TODO make this live swipe info
     #get user vector from local file (ideally will get new vector)
-    user_vector = np.load("users/user_prefs_louis.npy")
+    if use_local_npy:
+        print("Loading user vector from local npy file")
+        user_vector = np.load("users/user_prefs_louis.npy")
+    else:
+        print("calculating user preference vector...")
+        user_vector = get_user_preference_from_db(user_id)
+        if user_vector is None:
+            print("something went wrong getting user vector from db?")
+            print("have you swiped any/enough images?")
+            return {"status": "no_profile", "message": f"No user profile found for user_id {user_id}"}
+
+    # user_vector = np.load("users/user_prefs_louis.npy")
     #cosime similary with keykwords phrases - keywords_topktopk_phrases_for_user()
     top_phrases = topk_phrases_for_user(user_vector)
     print(top_phrases) #is a df with phrases column
@@ -334,6 +348,7 @@ def run_flow_from_user_vector():
     return {
         'locations' : locations_out,
         'phrases' : phrases_out,
+        'user_id' : user_id,
     }
 
 
