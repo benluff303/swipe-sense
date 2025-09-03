@@ -1,0 +1,21 @@
+
+torch
+torchvision
+sentence-transformers
+scikit-learn
+pandas
+numpy
+matplotlib
+jupyter
+tqdm
+pytest
+pyarrow
+
+
+
+# Othman Image embed model
+open-clip-torch
+faiss-cpu
+pillow
+requests
+tqdm
