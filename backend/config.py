@@ -16,7 +16,7 @@ LOCAL_DIRS = [Path.cwd() / "images", Path.cwd() / "data", Path.cwd()]
 
 # Limit dataset size for speed during dev
 # MAX_IMAGES: int | None = 100
-MAX_IMAGES: int | None = 500
+MAX_IMAGES: int | None = None
 
 # Reproducibility
 SEED: int = 123

@@ -18,78 +18,81 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 processor = CLIPProcessor.from_pretrained(MODEL_ID, use_fast=False)
 model = CLIPModel.from_pretrained(MODEL_ID).to(device)
 model.eval()
+
+
+### Othman Uppdate remove the down
 # -------- Image embeddings --------
-import gc
-import torch
+# import gc
+# import torch
 
-def get_image_features_batch(batch_imgs: List) -> np.ndarray:
-    """
-    OOM-safe: يحاول على الـ GPU، وإذا حصل out-of-memory يرجع يحسب نفس الدفعة على CPU.
-    """
-    out = None
-    try:
-        inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
-        with torch.no_grad():
-            emb = model.get_image_features(**inputs).float()
-        out = emb.cpu().numpy()
-    except RuntimeError as e:
-        msg = str(e).lower()
-        if "out of memory" in msg and device == "cuda":
-            # فضي الـ VRAM وجرب على CPU لنفس الدفعة
-            try:
-                torch.cuda.empty_cache()
-            except Exception:
-                pass
-            cpu_inputs = processor(images=batch_imgs, return_tensors="pt", padding=True)  # لا .to(device)
-            with torch.no_grad():
-                emb = model.get_image_features(**cpu_inputs).float()
-            out = emb.cpu().numpy()
-        else:
-            raise
-    finally:
-        try:
-            del inputs
-        except Exception:
-            pass
-        try:
-            del cpu_inputs
-        except Exception:
-            pass
-        if device == "cuda":
-            try:
-                torch.cuda.empty_cache()
-            except Exception:
-                pass
-        gc.collect()
-
-    return l2_normalize(out, axis=1).astype(np.float32)
-### Othman Uppdate
-# # -------- Image embeddings --------
 # def get_image_features_batch(batch_imgs: List) -> np.ndarray:
-#     inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
-#     with torch.no_grad():
-#         emb = model.get_image_features(**inputs).float()
-#     emb = emb.cpu().numpy()
-#     return l2_normalize(emb, axis=1).astype(np.float32)
-
-# def encode_all(paths: List[str], batch_size: int = 32) -> np.ndarray:
-#     """Compute CLIP embeddings for all image paths. Returns (N, D) float32, L2-normalized."""
-#     E_parts: list[np.ndarray] = []
-#     batch: list = []
-#     for i, p in enumerate(paths, 1):
+#     """
+#     OOM-safe: يحاول على الـ GPU، وإذا حصل out-of-memory يرجع يحسب نفس الدفعة على CPU.
+#     """
+#     out = None
+#     try:
+#         inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
+#         with torch.no_grad():
+#             emb = model.get_image_features(**inputs).float()
+#         out = emb.cpu().numpy()
+#     except RuntimeError as e:
+#         msg = str(e).lower()
+#         if "out of memory" in msg and device == "cuda":
+#             # فضي الـ VRAM وجرب على CPU لنفس الدفعة
+#             try:
+#                 torch.cuda.empty_cache()
+#             except Exception:
+#                 pass
+#             cpu_inputs = processor(images=batch_imgs, return_tensors="pt", padding=True)  # لا .to(device)
+#             with torch.no_grad():
+#                 emb = model.get_image_features(**cpu_inputs).float()
+#             out = emb.cpu().numpy()
+#         else:
+#             raise
+#     finally:
 #         try:
-#             batch.append(load_image_any(p))
+#             del inputs
 #         except Exception:
-#             # fallback black image if unreadable
-#             import PIL.Image as PILI
-#             batch.append(PILI.new("RGB", (224, 224), (0, 0, 0)))
-#         if len(batch) == batch_size or i == len(paths):
-#             E_parts.append(get_image_features_batch(batch))
-#             batch.clear()
-#         if i % 200 == 0:
-#             print(f"[embeddings] encoded {i}/{len(paths)}")
-#     E = np.vstack(E_parts).astype(np.float32)
-#     return l2_normalize(E, axis=1)
+#             pass
+#         try:
+#             del cpu_inputs
+#         except Exception:
+#             pass
+#         if device == "cuda":
+#             try:
+#                 torch.cuda.empty_cache()
+#             except Exception:
+#                 pass
+#         gc.collect()
+
+#     return l2_normalize(out, axis=1).astype(np.float32)
+### Othman Uppdate
+# -------- Image embeddings --------
+def get_image_features_batch(batch_imgs: List) -> np.ndarray:
+    inputs = processor(images=batch_imgs, return_tensors="pt", padding=True).to(device)
+    with torch.no_grad():
+        emb = model.get_image_features(**inputs).float()
+    emb = emb.cpu().numpy()
+    return l2_normalize(emb, axis=1).astype(np.float32)
+
+def encode_all(paths: List[str], batch_size: int = 32) -> np.ndarray:
+    """Compute CLIP embeddings for all image paths. Returns (N, D) float32, L2-normalized."""
+    E_parts: list[np.ndarray] = []
+    batch: list = []
+    for i, p in enumerate(paths, 1):
+        try:
+            batch.append(load_image_any(p))
+        except Exception:
+            # fallback black image if unreadable
+            import PIL.Image as PILI
+            batch.append(PILI.new("RGB", (224, 224), (0, 0, 0)))
+        if len(batch) == batch_size or i == len(paths):
+            E_parts.append(get_image_features_batch(batch))
+            batch.clear()
+        if i % 200 == 0:
+            print(f"[embeddings] encoded {i}/{len(paths)}")
+    E = np.vstack(E_parts).astype(np.float32)
+    return l2_normalize(E, axis=1)
 
 # -------- Text embeddings --------
 def embed_text_templates(labels: List[str], templates: List[str]) -> np.ndarray:
