@@ -45,7 +45,7 @@ def list_gcs_images(bucket: str, prefix: str = "", limit: int | None = None) -> 
     _ensure_gcs()
     blobs = _gcs_client.list_blobs(bucket, prefix=prefix or None)
     #human
-    print("found blobs", blobs)
+    # print("found blobs", blobs)
     # for blob in blobs:
     #     print(blob)
     # names = [blob.name for blob in blobs]

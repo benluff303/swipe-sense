@@ -94,31 +94,39 @@ def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, 
     """
     E_PATH = EMB_DIR / "embed_array_20k.npy"
     P_PATH = EMB_DIR / "paths20k.npy"
-    M_PATH = EMB_DIR / "meta500.json"
+    M_PATH = EMB_DIR / "meta20k.json" #adjust the count
+
+    # E_PATH = EMB_DIR / "E_fp32.npy"
+    # P_PATH = EMB_DIR / "paths.npy"
+    # M_PATH = EMB_DIR / "meta.json"
+
     print(E_PATH)
     print(P_PATH)
     print(M_PATH)
 
     #louis hunch
-    # E = load_numpy(E_PATH)
-    # return E, False
+    E = load_numpy(E_PATH)
+    return E, True
 
     # Try load
     if E_PATH.exists() and P_PATH.exists() and M_PATH.exists():
-        print("step 1")
+        print("step 1. all cached embed paths exist")
         meta_f = load_fingerprint(M_PATH) or {}
-        print(meta_f)
+        print("meta_f, fingerprint:", meta_f)
         if meta_f.get("model") == fingerprint.get("model") and meta_f.get("use_gcs") == fingerprint.get("use_gcs"):
             E = load_numpy(E_PATH)
             p = np.load(P_PATH, allow_pickle=True).tolist()[:MAX_IMAGES] #human MAX_IMAGES
-            print("step 2, hopefully now loading from cache")
+            print("step 2, trying loading paths and embeddings from cache")
             print(len(paths))
             print(len(p))
             print(paths)
             print(p)
             if len(p) == len(paths) and p == paths:
-                print("[embeddings] Loaded embeddings from cache. (not scratch)")
+                print("[embeddings] Loaded embeddings from cache. (not scratch) Means that the paths match")
                 return E.astype(np.float32), True
+            else:
+                print("paths mismatch, need to recompute")
+                print(p[:5], paths[:5])
 
     # Compute fresh
     # print("[embeddings] Computing embeddings from scratch…")
@@ -127,7 +135,7 @@ def load_or_compute_E(paths: List[str], fingerprint: dict) -> Tuple[np.ndarray, 
     # np.save(P_PATH, np.array(paths, dtype=object))
     # save_fingerprint(M_PATH, fingerprint)
     # print("[embeddings] Saved embeddings to", EMB_DIR)
-    print("[embeddings] !! Computing embeddings from scratch…")
+    print("[embeddings] WRONG!! Computing embeddings from scratch…")
 
     return None
     # return E, False

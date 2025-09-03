@@ -50,6 +50,9 @@ with col2:
         if st.button("➡️ Skip"):
             requests.post(f"{API}/feedback", json={"user_id": user_id, "idx": idx, "action": "swipe", "dwell": 0.0})
             fetch_next()
+        if st.button("Get user profile"):
+            r = requests.get(f"{API}/user_profile/{user_id}").json()
+            st.write(r)
 
 st.divider()
 st.caption("Backend API must be running. Start with:  `uvicorn app:app --reload`  and run this with:  `streamlit run streamlit_app.py`")
