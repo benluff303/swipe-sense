@@ -56,3 +56,9 @@ with col2:
 
 st.divider()
 st.caption("Backend API must be running. Start with:  `uvicorn app:app --reload`  and run this with:  `streamlit run streamlit_app.py`")
+
+st.divider()
+st.write("testing")
+if st.button("Run user vector to keywords flow"):
+    r = requests.get(f"{API}/user_to_keywords/{user_id}").json()
+    st.write(r)
