@@ -294,7 +294,7 @@ def get_user_profile(user_id: str, save=True):
     print("User prefs:", user_prefs)
     if user_prefs is not None:
         if save:
-            save_path = f"session_state/user_prefs_{user_id}.npy"
+            save_path = f"/users/user_prefs_{user_id}.npy"
             print("Saving user preferences to file:", save_path)
             np.save(save_path, user_prefs)
 
@@ -302,8 +302,45 @@ def get_user_profile(user_id: str, save=True):
     else:
         return {"status": "no_profile", "preference": None}
 
+
+from keywords_topk import topk_phrases_for_user
+from location_ranker import rank_locations_for_phrases
+
+
+@app.get("/user_to_keywords/")
+def run_flow_from_user_vector():
+    #TODO make this live swipe info
+    #get user vector from local file (ideally will get new vector)
+    user_vector = np.load("users/user_prefs_louis.npy")
+    #cosime similary with keykwords phrases - keywords_topktopk_phrases_for_user()
+    top_phrases = topk_phrases_for_user(user_vector)
+    print(top_phrases) #is a df with phrases column
+
+
+    phrases_list = top_phrases['Phrase'].tolist()
+    print("phrases list", phrases_list)
+
+    #embed 5 phrases with sbert
+    #run similarity with reviews (pre embedded with sbert), lcation ranker py
+    print("ranking locations for phrases DF")
+    locations_df = rank_locations_for_phrases(phrases_list)
+    print(locations_df)
+
+    phrases_out = phrases_list
+    locations_out = locations_df[['location', 'combined_score']].to_dict(orient='records')
+
+    print(locations_out)
+
+    return {
+        'locations' : locations_out,
+        'phrases' : phrases_out,
+    }
+
+
+
 if __name__ == "__main__":
-    print("running startup_event() manually: ")
-    startup_event()
+    # print("running startup_event() manually: ")
+    # startup_event()
+    run_flow_from_user_vector()
 
 print('end of file app.py')

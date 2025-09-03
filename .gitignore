@@ -114,11 +114,8 @@ ipython_config.py
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
-<<<<<<< HEAD
 #  https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-=======
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
->>>>>>> pipeline
 #poetry.lock
 #poetry.toml
 
@@ -220,3 +217,4 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 .DS_Store
+.python-version
