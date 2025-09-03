@@ -10,8 +10,8 @@ from sentence_transformers import SentenceTransformer
 
 @dataclass(frozen=True)
 class LocationRankConfig:
-    emb_npy_path: str = "../embeddings/Review_embeddings/review_embeddings.npy"
-    meta_csv_path: str = "../embeddings/Review_embeddings/meta.csv"
+    emb_npy_path: str = "embeddings/Review_embeddings/review_embeddings.npy"
+    meta_csv_path: str = "embeddings/Review_embeddings/meta.csv"
     model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     similarity_threshold: float = 0.35
     top_n_per_location: int = 10

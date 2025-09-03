@@ -1,10 +1,9 @@
 # Pipeline from user preference file to gpt JSON package
 
-
 import argparse, json, numpy as np
 from src.keywords_topk import KeywordTopKConfig, topk_phrases_for_user
 from src.location_ranker import LocationRankConfig, rank_locations_for_phrases
-from src.outputs import to_api_payload
+from src.package_for_gpt import to_api_payload
 
 default_kw = KeywordTopKConfig()
 default_loc = LocationRankConfig()

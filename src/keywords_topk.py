@@ -10,18 +10,14 @@ import numpy as np
 import pandas as pd
 
 
-user_pref_vec = np.load("user_vec.npy")               
-df = topk_phrases_for_user(user_pref_vec)
-
-
 ReturnType = Literal["df", "list"]
 
 
 @dataclass(frozen=True)
 
 class KeywordTopKConfig:
-    kw_mat_path: str = "../embeddings/keywords_embeddings.npy"
-    phrases_json_path: str = "../json_files/keywords_index.json"
+    kw_mat_path: str = "embeddings/keywords_embeddings.npy"
+    phrases_json_path: str = "json_files/keywords_index.json"
     top_k: int = 5
 
 def _l2_normalize_rows(X: np.ndarray, eps: float = 1e-12) -> np.ndarray:
@@ -46,6 +42,10 @@ def topk_phrases_for_user(
     cfg: KeywordTopKConfig = KeywordTopKConfig(),
     return_type: ReturnType = "df",
 ) -> Union[pd.DataFrame, List[str]]:
+
+    #user_pref_vec = np.load("user_vec.npy")
+    #df = topk_phrases_for_user(user_pref_vec)
+
     """
     Inputs:  user_pref_vec shape (512,) or (1,512); artifacts from cfg.
     Output:  either a DataFrame with rank/index/Phrase/cosine, or a list[str] of phrases.
