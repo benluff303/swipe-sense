@@ -23,7 +23,7 @@ SEED: int = 123
 
 # Artifacts & persistence paths
 EMB_DIR = Path("./emb_cache_20k"); EMB_DIR.mkdir(exist_ok=True)
-STATE_DIR = Path("./session_state"); STATE_DIR.mkdir(exist_ok=True)
+STATE_DIR = Path("./users"); STATE_DIR.mkdir(exist_ok=True)
 
 # User DB file (accumulated long-term profile)
 USER_DB_PATH = STATE_DIR / "users.json"
