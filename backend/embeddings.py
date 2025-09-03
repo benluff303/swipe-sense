@@ -9,9 +9,9 @@ import numpy as np
 import torch
 from transformers import CLIPProcessor, CLIPModel
 
-from config import MODEL_ID, EMB_DIR, MAX_IMAGES
-from utils import l2_normalize
-from storage_io import load_image_any
+from backend.config import MODEL_ID, EMB_DIR, MAX_IMAGES
+from backend.utils import l2_normalize
+from backend.storage_io import load_image_any
 
 # -------- Model init (module-global singletons) --------
 device = "cuda" if torch.cuda.is_available() else "cpu"

@@ -6,7 +6,7 @@ from collections import deque
 from typing import Dict, Set, Tuple
 import numpy as np
 
-from utils import l2_normalize
+from backend.utils import l2_normalize
 
 class ImageRecommender:
     def __init__(

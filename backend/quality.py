@@ -10,10 +10,10 @@ import numpy as np
 from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-from utils import ImageMeta, l2_normalize, minmax01
-from storage_io import load_image_any, upload_to_gcs
-from config import EMB_DIR
-from embeddings import embed_text_templates
+from backend.utils import ImageMeta, l2_normalize, minmax01
+from backend.storage_io import load_image_any, upload_to_gcs
+from backend.config import EMB_DIR
+from backend.embeddings import embed_text_templates
 
 # -----------------------------
 # Lightweight image descriptors

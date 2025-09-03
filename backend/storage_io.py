@@ -9,7 +9,7 @@ from typing import List, Dict
 from PIL import Image
 import numpy as np
 
-from config import USE_GCS, GCS_BUCKET, ARTIFACTS_PREFIX, MIRROR_TO_GCS, IMG_EXTS, LOCAL_DIRS
+from backend.config import USE_GCS, GCS_BUCKET, ARTIFACTS_PREFIX, MIRROR_TO_GCS, IMG_EXTS, LOCAL_DIRS
 # GCS imports are optional; import lazily
 from google.cloud import storage
 import gcsfs
