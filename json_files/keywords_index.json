@@ -1,0 +1,920 @@
+[
+  {
+    "column": "Vibes",
+    "row_idx": 0,
+    "text": "a travel scene that feels relaxing",
+    "emb_idx": 0
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 1,
+    "text": "a travel scene that feels tranquil",
+    "emb_idx": 1
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 2,
+    "text": "a travel scene that feels feels serene",
+    "emb_idx": 2
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 3,
+    "text": "a travel scene that feels laid-back",
+    "emb_idx": 3
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 4,
+    "text": "a travel scene that feels unhurried",
+    "emb_idx": 4
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 5,
+    "text": "a travel scene that feels energetic",
+    "emb_idx": 5
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 6,
+    "text": "a travel scene that feels lively",
+    "emb_idx": 6
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 7,
+    "text": "a travel scene that feels buzzing",
+    "emb_idx": 7
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 8,
+    "text": "a travel scene that feels vibrant",
+    "emb_idx": 8
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 9,
+    "text": "a travel scene that feels high-energy",
+    "emb_idx": 9
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 10,
+    "text": "a travel scene that feels secluded",
+    "emb_idx": 10
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 11,
+    "text": "a travel scene that feels inspirational",
+    "emb_idx": 11
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 12,
+    "text": "a travel scene that feels hidden",
+    "emb_idx": 12
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 13,
+    "text": "a travel scene that feels quiet",
+    "emb_idx": 13
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 14,
+    "text": "a travel scene that feels crowded",
+    "emb_idx": 14
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 15,
+    "text": "a travel scene that feels bustling",
+    "emb_idx": 15
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 16,
+    "text": "a travel scene that feels busy",
+    "emb_idx": 16
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 17,
+    "text": "a travel scene that feels packed",
+    "emb_idx": 17
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 18,
+    "text": "a travel scene that feels teeming",
+    "emb_idx": 18
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 19,
+    "text": "a travel scene that feels natural",
+    "emb_idx": 19
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 20,
+    "text": "a travel scene that feels wild",
+    "emb_idx": 20
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 21,
+    "text": "a travel scene that feels scenic",
+    "emb_idx": 21
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 22,
+    "text": "a travel scene that feels pastoral",
+    "emb_idx": 22
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 23,
+    "text": "a travel scene that feels rugged",
+    "emb_idx": 23
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 24,
+    "text": "a travel scene that feels urban",
+    "emb_idx": 24
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 25,
+    "text": "a travel scene that feels cosmopolitan",
+    "emb_idx": 25
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 26,
+    "text": "a travel scene that feels metropolitan",
+    "emb_idx": 26
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 27,
+    "text": "a travel scene that feels edgy",
+    "emb_idx": 27
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 28,
+    "text": "a travel scene that feels street-level",
+    "emb_idx": 28
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 29,
+    "text": "a travel scene that feels budget",
+    "emb_idx": 29
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 30,
+    "text": "a travel scene that feels no-frills",
+    "emb_idx": 30
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 31,
+    "text": "a travel scene that feels backpacker",
+    "emb_idx": 31
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 32,
+    "text": "a travel scene that feels worthwhile",
+    "emb_idx": 32
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 33,
+    "text": "a travel scene that feels luxurious",
+    "emb_idx": 33
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 34,
+    "text": "a travel scene that feels upscale",
+    "emb_idx": 34
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 35,
+    "text": "a travel scene that feels opulent",
+    "emb_idx": 35
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 36,
+    "text": "a travel scene that feels premium",
+    "emb_idx": 36
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 37,
+    "text": "a travel scene that feels calm",
+    "emb_idx": 37
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 38,
+    "text": "a travel scene that feels soothing",
+    "emb_idx": 38
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 39,
+    "text": "a travel scene that feels mellow",
+    "emb_idx": 39
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 40,
+    "text": "a travel scene that feels gentle",
+    "emb_idx": 40
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 41,
+    "text": "a travel scene that feels contemplative",
+    "emb_idx": 41
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 42,
+    "text": "a travel scene that feels adventurous",
+    "emb_idx": 42
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 43,
+    "text": "a travel scene that feels daring",
+    "emb_idx": 43
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 44,
+    "text": "a travel scene that feels thrilling",
+    "emb_idx": 44
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 45,
+    "text": "a travel scene that feels adrenaline-fueled",
+    "emb_idx": 45
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 46,
+    "text": "a travel scene that feels bold",
+    "emb_idx": 46
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 47,
+    "text": "a travel scene that feels suited to daytime",
+    "emb_idx": 47
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 48,
+    "text": "a travel scene that feels sunlit",
+    "emb_idx": 48
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 49,
+    "text": "a travel scene that feels bright",
+    "emb_idx": 49
+  },
+  {
+    "column": "Vibes",
+    "row_idx": 50,
+    "text": "a travel scene that feels sombre",
+    "emb_idx": 50
+  },
+  {
+    "column": "Activities",
+    "row_idx": 0,
+    "text": "a location with waves where someone could do surfing",
+    "emb_idx": 51
+  },
+  {
+    "column": "Activities",
+    "row_idx": 1,
+    "text": "a scenic place where someone could do photography",
+    "emb_idx": 52
+  },
+  {
+    "column": "Activities",
+    "row_idx": 2,
+    "text": "a place where someone could do scuba diving",
+    "emb_idx": 53
+  },
+  {
+    "column": "Activities",
+    "row_idx": 3,
+    "text": "a place where someone could do kayaking",
+    "emb_idx": 54
+  },
+  {
+    "column": "Activities",
+    "row_idx": 4,
+    "text": "a place where someone could do watersports",
+    "emb_idx": 55
+  },
+  {
+    "column": "Activities",
+    "row_idx": 5,
+    "text": "a place with snow and mountains where someone could do skiing",
+    "emb_idx": 56
+  },
+  {
+    "column": "Activities",
+    "row_idx": 6,
+    "text": "a place with snow and mountains where someone could do snowboarding",
+    "emb_idx": 57
+  },
+  {
+    "column": "Activities",
+    "row_idx": 7,
+    "text": "a city where someone could visit the theatre",
+    "emb_idx": 58
+  },
+  {
+    "column": "Activities",
+    "row_idx": 8,
+    "text": "a rocky or mountainous place where someone could do rock climbing",
+    "emb_idx": 59
+  },
+  {
+    "column": "Activities",
+    "row_idx": 9,
+    "text": "a northern city or a place with a frozen lake where someone could do ice skating",
+    "emb_idx": 60
+  },
+  {
+    "column": "Activities",
+    "row_idx": 10,
+    "text": "a natural setting where someone could do hiking",
+    "emb_idx": 61
+  },
+  {
+    "column": "Activities",
+    "row_idx": 11,
+    "text": "a jungle or forest where someone could do jungle or forest trekking",
+    "emb_idx": 62
+  },
+  {
+    "column": "Activities",
+    "row_idx": 12,
+    "text": "a place with cliffs and waterfalls where someone could go canyoning",
+    "emb_idx": 63
+  },
+  {
+    "column": "Activities",
+    "row_idx": 13,
+    "text": "a place with trails where someone could do trail running",
+    "emb_idx": 64
+  },
+  {
+    "column": "Activities",
+    "row_idx": 14,
+    "text": "a place with scenic roads someone could do road cycling",
+    "emb_idx": 65
+  },
+  {
+    "column": "Activities",
+    "row_idx": 15,
+    "text": "a place with rough trails could do mountain biking",
+    "emb_idx": 66
+  },
+  {
+    "column": "Activities",
+    "row_idx": 16,
+    "text": "a place with scenic roads someone could do a scooter tour",
+    "emb_idx": 67
+  },
+  {
+    "column": "Activities",
+    "row_idx": 17,
+    "text": "a conurbation where someone could find workshops",
+    "emb_idx": 68
+  },
+  {
+    "column": "Activities",
+    "row_idx": 18,
+    "text": "a place with scenic roads someone could do scenic driving",
+    "emb_idx": 69
+  },
+  {
+    "column": "Activities",
+    "row_idx": 19,
+    "text": "a place with landmarks where someone could do sightseeing",
+    "emb_idx": 70
+  },
+  {
+    "column": "Activities",
+    "row_idx": 20,
+    "text": "a city where someone could visit museums",
+    "emb_idx": 71
+  },
+  {
+    "column": "Activities",
+    "row_idx": 21,
+    "text": "a city where someone could visit art gallerys",
+    "emb_idx": 72
+  },
+  {
+    "column": "Activities",
+    "row_idx": 22,
+    "text": "a city or town where someone could do a guided walking tour",
+    "emb_idx": 73
+  },
+  {
+    "column": "Activities",
+    "row_idx": 23,
+    "text": "a city, town or landmark where someone could heritage site visit",
+    "emb_idx": 74
+  },
+  {
+    "column": "Activities",
+    "row_idx": 24,
+    "text": "a city or town where someone could go nightclubbing",
+    "emb_idx": 75
+  },
+  {
+    "column": "Activities",
+    "row_idx": 25,
+    "text": "a city or town where someone could go bar hopping",
+    "emb_idx": 76
+  },
+  {
+    "column": "Activities",
+    "row_idx": 26,
+    "text": "a city or town where someone could find concerts",
+    "emb_idx": 77
+  },
+  {
+    "column": "Activities",
+    "row_idx": 27,
+    "text": "a populous beach where someone could find a beach party",
+    "emb_idx": 78
+  },
+  {
+    "column": "Activities",
+    "row_idx": 28,
+    "text": "a city, town or resort where someone could go shopping",
+    "emb_idx": 79
+  },
+  {
+    "column": "Activities",
+    "row_idx": 29,
+    "text": "a beach where someone could do sunbathing",
+    "emb_idx": 80
+  },
+  {
+    "column": "Activities",
+    "row_idx": 30,
+    "text": "a hotel or resort where someone could have a spa day",
+    "emb_idx": 81
+  },
+  {
+    "column": "Activities",
+    "row_idx": 31,
+    "text": "a peaceful nature location or beach where someone could do a yoga class",
+    "emb_idx": 82
+  },
+  {
+    "column": "Activities",
+    "row_idx": 32,
+    "text": "a city where someone could visit interactive attractions",
+    "emb_idx": 83
+  },
+  {
+    "column": "Activities",
+    "row_idx": 33,
+    "text": "a place with rough roads and scenic views where someone could do off-roading",
+    "emb_idx": 84
+  },
+  {
+    "column": "Activities",
+    "row_idx": 34,
+    "text": "a vineyard where someone could do wine tasting",
+    "emb_idx": 85
+  },
+  {
+    "column": "Activities",
+    "row_idx": 35,
+    "text": "a city or town where someone could do a history tour",
+    "emb_idx": 86
+  },
+  {
+    "column": "Activities",
+    "row_idx": 36,
+    "text": "a lively city where someone could enjoy street food",
+    "emb_idx": 87
+  },
+  {
+    "column": "Activities",
+    "row_idx": 37,
+    "text": "a scene with food where someone could learn cooking",
+    "emb_idx": 88
+  },
+  {
+    "column": "Activities",
+    "row_idx": 38,
+    "text": "a city with restaurants where someone could learn cooking",
+    "emb_idx": 89
+  },
+  {
+    "column": "Activities",
+    "row_idx": 39,
+    "text": "a scene with animals or birds where someone could do wildlife watching",
+    "emb_idx": 90
+  },
+  {
+    "column": "Activities",
+    "row_idx": 40,
+    "text": "a scene with birds where someone could do birdwatching",
+    "emb_idx": 91
+  },
+  {
+    "column": "Activities",
+    "row_idx": 41,
+    "text": "a calm natural scene or hotel or resort where someone could spend time lounging",
+    "emb_idx": 92
+  },
+  {
+    "column": "Activities",
+    "row_idx": 42,
+    "text": "a savanna plain where someone could do a safari",
+    "emb_idx": 93
+  },
+  {
+    "column": "Activities",
+    "row_idx": 43,
+    "text": "a night sky with stars where someone could enjoy stargazing",
+    "emb_idx": 94
+  },
+  {
+    "column": "Activities",
+    "row_idx": 44,
+    "text": "a river with white water where someone could do rafting",
+    "emb_idx": 95
+  },
+  {
+    "column": "Activities",
+    "row_idx": 45,
+    "text": "a cliff where someone could do paragliding",
+    "emb_idx": 96
+  },
+  {
+    "column": "Activities",
+    "row_idx": 46,
+    "text": "a high bridge where someone could do bungee jumping",
+    "emb_idx": 97
+  },
+  {
+    "column": "Activities",
+    "row_idx": 47,
+    "text": "a coastal place where someone could go boating or sailing",
+    "emb_idx": 98
+  },
+  {
+    "column": "Activities",
+    "row_idx": 48,
+    "text": "a resort or hotel with things for families to do such as swimming pool or play area",
+    "emb_idx": 99
+  },
+  {
+    "column": "Activities",
+    "row_idx": 49,
+    "text": "a scene with animals or birds where someone could do a wildlife tour",
+    "emb_idx": 100
+  },
+  {
+    "column": "Activities",
+    "row_idx": 50,
+    "text": "a resort or hotel where someone could do sports",
+    "emb_idx": 101
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 0,
+    "text": "a scene with a beach",
+    "emb_idx": 102
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 1,
+    "text": "a scene with a coral reef",
+    "emb_idx": 103
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 2,
+    "text": "a scene with a lagoon",
+    "emb_idx": 104
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 3,
+    "text": "a scene with sea cliffs",
+    "emb_idx": 105
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 4,
+    "text": "a scene of a city or town with a seafront",
+    "emb_idx": 106
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 5,
+    "text": "a scene of an entertainment event such as live music, dancing or theatre",
+    "emb_idx": 107
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 6,
+    "text": "a scene of a fishing village",
+    "emb_idx": 108
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 7,
+    "text": "a scene of an island",
+    "emb_idx": 109
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 8,
+    "text": "a scene of a skyline",
+    "emb_idx": 110
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 9,
+    "text": "a scene of a surf break",
+    "emb_idx": 111
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 10,
+    "text": "a scene of a mountain",
+    "emb_idx": 112
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 11,
+    "text": "a scene of a meadow or fields",
+    "emb_idx": 113
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 12,
+    "text": "a scene of a glacier",
+    "emb_idx": 114
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 13,
+    "text": "a scene with snow",
+    "emb_idx": 115
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 14,
+    "text": "a scene of a valley",
+    "emb_idx": 116
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 15,
+    "text": "a scene of a canyon or gorge",
+    "emb_idx": 117
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 16,
+    "text": "a scene of a famous landmark",
+    "emb_idx": 118
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 17,
+    "text": "a scene of a waterfall",
+    "emb_idx": 119
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 18,
+    "text": "a scene of a river",
+    "emb_idx": 120
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 19,
+    "text": "a scene of a lake",
+    "emb_idx": 121
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 20,
+    "text": "a scene of a hot spring",
+    "emb_idx": 122
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 21,
+    "text": "a city scene of an old quarter such as medieval buildings",
+    "emb_idx": 123
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 22,
+    "text": "a scene of a volcano",
+    "emb_idx": 124
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 23,
+    "text": "a scene of sand dunes",
+    "emb_idx": 125
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 24,
+    "text": "a scene of an eco-lodge",
+    "emb_idx": 126
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 25,
+    "text": "a scene of a desert",
+    "emb_idx": 127
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 26,
+    "text": "a city scene showing street art",
+    "emb_idx": 128
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 27,
+    "text": "a scene of a palm grove",
+    "emb_idx": 129
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 28,
+    "text": "a scene of a farm",
+    "emb_idx": 130
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 29,
+    "text": "a scene of a rainforest or jungle",
+    "emb_idx": 131
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 30,
+    "text": "a scene of canals",
+    "emb_idx": 132
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 31,
+    "text": "a scene of a mangrove",
+    "emb_idx": 133
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 32,
+    "text": "a scene of a luxury hotel",
+    "emb_idx": 134
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 33,
+    "text": "a scene of a festival",
+    "emb_idx": 135
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 34,
+    "text": "a scene of rice terraces",
+    "emb_idx": 136
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 35,
+    "text": "a scene of a tea plantation",
+    "emb_idx": 137
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 36,
+    "text": "a scene of a vineyard",
+    "emb_idx": 138
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 37,
+    "text": "a scene of a cottage",
+    "emb_idx": 139
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 38,
+    "text": "a scene of a market",
+    "emb_idx": 140
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 39,
+    "text": "a scene of a savannah",
+    "emb_idx": 141
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 40,
+    "text": "a scene of a national park",
+    "emb_idx": 142
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 41,
+    "text": "a scene of a game reserve",
+    "emb_idx": 143
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 42,
+    "text": "a scene of a coastal town",
+    "emb_idx": 144
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 43,
+    "text": "a scene of a carnival",
+    "emb_idx": 145
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 44,
+    "text": "a scene of cobblestone streets",
+    "emb_idx": 146
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 45,
+    "text": "a scene of a town square",
+    "emb_idx": 147
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 46,
+    "text": "a scene of a mosque",
+    "emb_idx": 148
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 47,
+    "text": "a scene of a temple, church or cathedral",
+    "emb_idx": 149
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 48,
+    "text": "a scene of hills",
+    "emb_idx": 150
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 49,
+    "text": "a scene of a historic site",
+    "emb_idx": 151
+  },
+  {
+    "column": "Destination Features",
+    "row_idx": 50,
+    "text": "a scene of a castle",
+    "emb_idx": 152
+  }
+]

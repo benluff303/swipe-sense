@@ -8,7 +8,7 @@ matplotlib
 jupyter
 tqdm
 pytest
-
+pyarrow
 
 # Othman Image embed model
 open-clip-torch

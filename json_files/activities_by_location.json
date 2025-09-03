@@ -1,0 +1,702 @@
+{
+  "London": [
+    "immersive experience",
+    "theatre",
+    "boat cruise",
+    "museum",
+    "market"
+  ],
+  "Paris": [
+    "boat cruise",
+    "landmark",
+    "museum",
+    "neighborhood",
+    "park/garden"
+  ],
+  "Barcelona": [
+    "architecture",
+    "water sport",
+    "adventure sport",
+    "sports venue",
+    "museum"
+  ],
+  "Rome": [
+    "museum",
+    "historic site",
+    "historic site",
+    "historic site",
+    "park/garden"
+  ],
+  "Venice": [
+    "historic square",
+    "boat ride",
+    "island visit",
+    "boat ride",
+    "shop"
+  ],
+  "Athens": [
+    "historic site",
+    "museum",
+    "market",
+    "museum",
+    "viewpoint"
+  ],
+  "Amsterdam": [
+    "boat cruise",
+    "museum",
+    "museum",
+    "park/garden",
+    "neighborhood"
+  ],
+  "Berlin": [
+    "zoo",
+    "landmark",
+    "landmark",
+    "square",
+    "market"
+  ],
+  "Prague": [
+    "park/garden",
+    "landmark",
+    "old town",
+    "river walk",
+    "historic site"
+  ],
+  "Vienna": [
+    "music/performance",
+    "park/garden",
+    "amusement park",
+    "carriage ride",
+    "cafe culture"
+  ],
+  "Interlaken": [
+    "extreme sport",
+    "hiking",
+    "boat cruise",
+    "water sport",
+    "workshop"
+  ],
+  "Dolomites": [
+    "hiking",
+    "lake",
+    "meadow",
+    "museum",
+    "driving route"
+  ],
+  "Lofoten Islands": [
+    "water sport",
+    "hiking",
+    "natural wonder",
+    "fishing village",
+    "winter sport"
+  ],
+  "Lapland": [
+    "sledding",
+    "winter sport",
+    "winter sport",
+    "winter sport",
+    "natural wonder"
+  ],
+  "Plitvice Lakes": [
+    "waterfall",
+    "boat ride",
+    "hiking",
+    "wildlife",
+    "historic site"
+  ],
+  "Faroe Islands": [
+    "wildlife",
+    "hiking",
+    "waterfall",
+    "boat ride",
+    "village"
+  ],
+  "Madeira": [
+    "natural pool",
+    "hiking",
+    "wildlife",
+    "unique ride",
+    "hiking"
+  ],
+  "Azores": [
+    "hiking",
+    "wildlife",
+    "natural wonder",
+    "hot springs",
+    "factory visit"
+  ],
+  "Santorini": [
+    "hiking",
+    "boat ride",
+    "hot springs",
+    "water sport",
+    "vineyard"
+  ],
+  "Dubrovnik": [
+    "historic site",
+    "old town",
+    "water sport",
+    "museum",
+    "beach"
+  ],
+  "Scottish Highlands": [
+    "wildlife safari",
+    "national park",
+    "monument",
+    "hiking",
+    "castle"
+  ],
+  "Reykjavik": [
+    "food tour",
+    "hot springs",
+    "concert hall",
+    "church",
+    "museum"
+  ],
+  "Tokyo": [
+    "art museum",
+    "market",
+    "sports venue",
+    "park/garden",
+    "entertainment"
+  ],
+  "Kyoto": [
+    "shrine/temple",
+    "bamboo forest",
+    "cultural activity",
+    "food market",
+    "shrine/temple"
+  ],
+  "Seoul": [
+    "palace",
+    "shopping",
+    "historic village",
+    "food market",
+    "river walk"
+  ],
+  "Hong Kong": [
+    "viewpoint",
+    "market",
+    "temple",
+    "theme park",
+    "hiking"
+  ],
+  "Singapore": [
+    "park/garden",
+    "botanic garden",
+    "viewpoint",
+    "nature reserve",
+    "resort"
+  ],
+  "Bangkok": [
+    "nightlife",
+    "market",
+    "temple",
+    "street food",
+    "market"
+  ],
+  "Hanoi": [
+    "old town",
+    "historic site",
+    "theatre/show",
+    "lake activity",
+    "historic village"
+  ],
+  "Siem Reap": [
+    "cooking class",
+    "temple",
+    "market",
+    "circus/show",
+    "waterfall"
+  ],
+  "Phuket": [
+    "wildlife",
+    "boat cruise",
+    "temple",
+    "water sport",
+    "old town"
+  ],
+  "Bali": [
+    "hiking",
+    "water sport",
+    "park/garden",
+    "temple",
+    "theme park"
+  ],
+  "Jeju Island": [
+    "hiking",
+    "waterfall",
+    "cultural activity",
+    "natural wonder",
+    "beach"
+  ],
+  "Hokkaido": [
+    "zoo",
+    "ski resort",
+    "park/garden",
+    "geothermal site",
+    "natural site"
+  ],
+  "Raja Ampat": [
+    "water sport",
+    "boat cruise",
+    "hiking",
+    "village visit",
+    "wildlife safari"
+  ],
+  "Palawan": [
+    "boat cruise",
+    "cave/river",
+    "water sport",
+    "night activity",
+    "safari park"
+  ],
+  "Komodo Island": [
+    "wildlife safari",
+    "water sport",
+    "boat cruise",
+    "hiking",
+    "beach"
+  ],
+  "Ladakh": [
+    "camping",
+    "natural wonder",
+    "monastery",
+    "rafting",
+    "camel ride"
+  ],
+  "Langtang": [
+    "trekking",
+    "monastery",
+    "viewpoint",
+    "national park",
+    "adventure sport"
+  ],
+  "Ella": [
+    "landmark",
+    "hiking",
+    "hiking",
+    "plantation/farm",
+    "adventure sport"
+  ],
+  "Gobi Desert": [
+    "camel ride",
+    "desert hiking",
+    "fossil site",
+    "camping",
+    "monastery"
+  ],
+  "Bagan": [
+    "temple",
+    "hot air balloon",
+    "boat cruise",
+    "biking",
+    "viewpoint"
+  ],
+  "Boracay": [
+    "island hopping",
+    "adventure sport",
+    "water sport",
+    "sailing",
+    "beach"
+  ],
+  "Male": [
+    "market",
+    "mosque",
+    "boat cruise",
+    "island hopping",
+    "museum"
+  ],
+  "New York City": [
+    "memorial/museum",
+    "viewpoint",
+    "park/garden",
+    "landmark",
+    "landmark"
+  ],
+  "San Francisco": [
+    "park/garden",
+    "aquarium",
+    "neighborhood",
+    "surfing",
+    "museum"
+  ],
+  "Miami": [
+    "beach",
+    "neighborhood",
+    "aquarium/zoo",
+    "market",
+    "safari/wildlife"
+  ],
+  "Vancouver": [
+    "hiking",
+    "bridge/walk",
+    "street food",
+    "kayaking",
+    "market"
+  ],
+  "Toronto": [
+    "park/garden",
+    "museum",
+    "museum",
+    "historic site",
+    "historic site"
+  ],
+  "Mexico City": [
+    "museum",
+    "museum",
+    "performance/sport",
+    "park/garden",
+    "boat ride"
+  ],
+  "Banff": [
+    "viewpoint",
+    "hiking",
+    "horseback riding",
+    "hot springs",
+    "boat ride"
+  ],
+  "Jasper": [
+    "viewpoint",
+    "hiking",
+    "rafting",
+    "canyon hike",
+    "wildlife safari"
+  ],
+  "Yellowstone": [
+    "wildlife safari",
+    "geyser",
+    "hiking",
+    "hot springs",
+    "geothermal site"
+  ],
+  "Yosemite": [
+    "hiking",
+    "rafting",
+    "climbing",
+    "forest/nature",
+    "waterfall"
+  ],
+  "Grand Canyon": [
+    "hiking",
+    "rafting",
+    "helicopter tour",
+    "viewpoint",
+    "guided tour"
+  ],
+  "Sedona": [
+    "hiking",
+    "jeep tour",
+    "hot air balloon",
+    "spiritual site",
+    "crafts market"
+  ],
+  "Alaska/Denali": [
+    "wildlife safari",
+    "bus tour",
+    "dog sledding",
+    "flightseeing",
+    "seasonal activity"
+  ],
+  "Honolulu/Oahu": [
+    "historic site",
+    "hiking",
+    "snorkeling",
+    "beach",
+    "adventure sport"
+  ],
+  "New Orleans": [
+    "boat cruise",
+    "museum",
+    "museum",
+    "market",
+    "zoo/aquarium"
+  ],
+  "Quebec City": [
+    "waterfall",
+    "spa/wellness",
+    "old town",
+    "landmark",
+    "park/nature"
+  ],
+  "Rio de Janeiro": [
+    "landmark",
+    "cable car",
+    "hiking",
+    "garden/park",
+    "adventure sport"
+  ],
+  "Cartagena": [
+    "historic site",
+    "water sport",
+    "cooking class",
+    "castle/fort",
+    "wellness/spa"
+  ],
+  "Havana": [
+    "cultural activity",
+    "landmark",
+    "museum",
+    "old town",
+    "theatre/show"
+  ],
+  "Canc\u00fan": [
+    "water sport",
+    "historic site",
+    "theme park",
+    "theme park",
+    "island visit"
+  ],
+  "Tulum": [
+    "boat ride",
+    "water sport",
+    "adventure sport",
+    "historic site",
+    "water sport"
+  ],
+  "Punta Cana": [
+    "water sport",
+    "adventure sport",
+    "cultural activity",
+    "adventure sport",
+    "theme park"
+  ],
+  "Gal\u00e1pagos Islands": [
+    "water sport",
+    "hiking",
+    "diving/snorkel",
+    "wildlife",
+    "water sport"
+  ],
+  "Torres del Paine": [
+    "hiking",
+    "water sport",
+    "wildlife",
+    "horseback riding",
+    "biking"
+  ],
+  "Atacama Desert": [
+    "stargazing",
+    "geothermal site",
+    "hiking",
+    "salt pools",
+    "hiking"
+  ],
+  "Salar de Uyuni": [
+    "biking",
+    "nature reserve",
+    "landmark",
+    "wildlife",
+    "geothermal site"
+  ],
+  "Lake Titicaca": [
+    "cultural activity",
+    "homestay",
+    "historic site",
+    "hiking",
+    "water sport"
+  ],
+  "Bariloche": [
+    "hiking",
+    "scenic drive",
+    "winter sport",
+    "boat ride",
+    "scenic drive"
+  ],
+  "Fernando de Noronha": [
+    "beach",
+    "water sport",
+    "cultural site",
+    "hiking",
+    "hiking"
+  ],
+  "Arenal": [
+    "hot springs",
+    "hiking",
+    "adventure sport",
+    "rafting",
+    "hiking"
+  ],
+  "San Juan": [
+    "rainforest walk",
+    "historic site",
+    "water activity",
+    "market",
+    "water sport"
+  ],
+  "Marrakech": [
+    "historic site",
+    "garden/park",
+    "old town",
+    "spa/wellness",
+    "adventure sport"
+  ],
+  "Cairo": [
+    "historic site",
+    "museum",
+    "boat cruise",
+    "market",
+    "park/garden"
+  ],
+  "Cape Town": [
+    "hiking",
+    "hiking",
+    "coastal walk",
+    "day trip",
+    "wildlife safari"
+  ],
+  "Kruger": [
+    "wildlife safari",
+    "biking",
+    "cultural activity",
+    "hot air balloon",
+    "wildlife safari"
+  ],
+  "Maasai Mara": [
+    "wildlife safari",
+    "cultural activity",
+    "safari/wildlife",
+    "birdwatching",
+    "horseback riding"
+  ],
+  "Serengeti": [
+    "wildlife safari",
+    "hot air balloon",
+    "wildlife safari",
+    "cultural visit",
+    "hiking safari"
+  ],
+  "Zanzibar": [
+    "old town tour",
+    "snorkeling",
+    "boat cruise",
+    "forest walk",
+    "beach activity"
+  ],
+  "Mount Kilimanjaro": [
+    "trekking",
+    "hot springs",
+    "waterfall hike",
+    "birdwatching",
+    "adventure sport"
+  ],
+  "Okavango Delta": [
+    "canoe safari",
+    "wildlife safari",
+    "flightseeing",
+    "boat cruise",
+    "wildlife safari"
+  ],
+  "Namib Desert": [
+    "sandboarding",
+    "hot air balloon",
+    "dune hiking",
+    "desert tour",
+    "wildlife safari"
+  ],
+  "Bazaruto Archipelago": [
+    "diving/snorkel",
+    "reef diving",
+    "sandboarding",
+    "boat cruise",
+    "wildlife safari"
+  ],
+  "Seychelles": [
+    "botanic garden",
+    "snorkeling",
+    "hiking",
+    "beach activity",
+    "nature reserve"
+  ],
+  "Mauritius": [
+    "water sport",
+    "hiking",
+    "wildlife park",
+    "boat cruise",
+    "village visit"
+  ],
+  "Fes": [
+    "old town tour",
+    "tannery visit",
+    "historic site",
+    "spa/wellness",
+    "museum"
+  ],
+  "Jerusalem": [
+    "landmark walk",
+    "religious site",
+    "historic site",
+    "historic site",
+    "religious site"
+  ],
+  "Petra": [
+    "historic site",
+    "historic site",
+    "hiking",
+    "historic site",
+    "cultural show"
+  ],
+  "Dubai": [
+    "landmark",
+    "desert safari",
+    "fountain show",
+    "boat cruise",
+    "shopping/mall"
+  ],
+  "Wadi Rum": [
+    "jeep tour",
+    "desert camping",
+    "sandboarding",
+    "hiking",
+    "cultural site"
+  ],
+  "Musandam Fjords": [
+    "boat cruise",
+    "kayaking",
+    "diving/snorkel",
+    "castle/fort",
+    "fishing"
+  ],
+  "Muscat": [
+    "snorkeling",
+    "mosque",
+    "market",
+    "natural site",
+    "wildlife safari"
+  ],
+  "Tel Aviv": [
+    "architecture",
+    "market",
+    "old town tour",
+    "beach activity",
+    "street art"
+  ],
+  "Sydney": [
+    "coastal walk",
+    "zoo/aquarium",
+    "landmark",
+    "historic site",
+    "kayaking"
+  ],
+  "Queenstown": [
+    "adventure sport",
+    "gondola ride",
+    "adventure sport",
+    "garden/park",
+    "biking"
+  ],
+  "Rotorua": [
+    "geothermal site",
+    "treetop walk",
+    "spa/wellness",
+    "gondola ride",
+    "cultural activity"
+  ],
+  "Cairns": [
+    "snorkeling",
+    "rainforest tour",
+    "adventure sport",
+    "coastal walk",
+    "waterfall visit"
+  ]
+}
