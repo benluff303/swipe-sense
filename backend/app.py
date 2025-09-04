@@ -39,8 +39,8 @@ from backend.quality import (
 )
 from backend.utils import l2_normalize
 
-from keywords_topk import topk_phrases_for_user
-from location_ranker import rank_locations_for_phrases
+# from keywords_topk import topk_phrases_for_user
+# from location_ranker import rank_locations_for_phrases
 
 # ---------------------------
 # Global runtime state
@@ -112,19 +112,13 @@ def get_user_preference_from_db(user_id: str):
     w = float(ent.get("accum_weight", 0.0))
     if s.size == rec.D and w > 0:
         pref = l2_normalize(s / max(w, 1e-9))
+        print(f'get_user_preference_from_db output: {pref}')
         return pref
     return None
 
 # ---------------------------
 # Startup: build the batch pipeline
 # ---------------------------
-
-@app.get("/reset_user_prefs")
-def reset_user_prefs():
-    global user_db
-    user_db = {}
-    print("user preferences have been reset")
-    return {'reset': 'done'}
 
 
 
@@ -133,7 +127,7 @@ def reset_user_prefs():
 def startup_event():
     global paths, meta, ahash_groups, E, Q_NORM, rec, user_db
 
-    random.seed(SEED); np.random.seed(SEED)
+    # random.seed(SEED); np.random.seed(SEED)
     print("starting up")
     # 1) Discover dataset
     if USE_GCS:
@@ -323,9 +317,18 @@ def get_user_profile(user_id: str, save=True):
 
 
 
+@app.get("/reset_user_prefs")
+def reset_user_prefs():
+    global user_db
+    user_db = {}
+    save_user_db(user_db)
+    print("user preferences have been reset")
+    return {'reset': 'done'}
+
 
 @app.get("/user_to_keywords/{user_id}")
-def run_flow_from_user_vector(use_local_npy = False, user_id="default"):
+def run_flow_from_user_vector(use_local_npy: bool = False, user_id="default"):
+
     print("running user vector flow with user:", user_id)
     #TODO make this live swipe info
     #get user vector from local file (ideally will get new vector)

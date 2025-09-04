@@ -218,3 +218,4 @@ marimo/_lsp/
 __marimo__/
 .DS_Store
 .python-version
+emb_cache_20k/

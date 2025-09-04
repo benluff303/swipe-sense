@@ -15,7 +15,7 @@ GCS_PREFIX = ""                      # optional subfolder in the bucket
 LOCAL_DIRS = [Path.cwd() / "images", Path.cwd() / "data", Path.cwd()]
 
 # Limit dataset size for speed during dev
-MAX_IMAGES: int | None = 100
+# MAX_IMAGES: int | None = 100
 MAX_IMAGES: int | None = 20888
 
 # Reproducibility
@@ -79,7 +79,7 @@ DIVERSITY_LAST_K_DEFAULT = 20
 DIVERSITY_MIN_COS_DEFAULT = 0.92
 HIDE_EXACT_DUPES_DEFAULT = True
 
-POOL_K_DEFAULT = 300
+POOL_K_DEFAULT = 15000
 LAMBDA_DIV_DEFAULT = 0.50
 NEAR_DUPE_THR_DEFAULT = 0.95
 QUALITY_BOOST_DEFAULT = 0.30
