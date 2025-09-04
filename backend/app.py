@@ -259,6 +259,7 @@ def get_next(req: NextRequest):
     )
     if idx is None:
         return {"status": "end"}
+    
     return {"status": "ok", "idx": int(idx), "path": paths[int(idx)], "sim_score": float(score) if score is not None else None}
 
 @app.post("/feedback")
@@ -272,6 +273,7 @@ def send_feedback(fb: Feedback):
 
     # update online preference
     rec._update(idx, float(val))
+    print(rec)
     return {"status": "ok", "eta_now": float(rec.eta)}
 
 @app.get("/image/{idx}")
