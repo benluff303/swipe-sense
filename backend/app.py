@@ -326,21 +326,22 @@ def reset_user_prefs():
     return {'reset': 'done'}
 
 
-@app.get("/user_to_keywords")
-def run_flow_from_user_vector(user_id: str = "louis", use_local_npy: bool = False):
+@app.get("/user_to_keywords/{user_id}")
+def run_flow_from_user_vector(use_local_npy: bool = False, user_id="default"):
+
     print("running user vector flow with user:", user_id)
     #TODO make this live swipe info
     #get user vector from local file (ideally will get new vector)
-    if use_local_npy:
-        print("Loading user vector from local npy file")
-        user_vector = np.load("users/user_prefs_louis.npy")
-    else:
-        print("calculating user preference vector...")
-        user_vector = get_user_preference_from_db(user_id)
-        if user_vector is None:
-            print("something went wrong getting user vector from db?")
-            print("have you swiped any/enough images?")
-            return {"status": "no_profile", "message": f"No user profile found for user_id {user_id}"}
+#    if use_local_npy:
+    #     print("Loading user vector from local npy file")
+    #     user_vector = np.load("users/user_prefs_louis.npy")
+    # else:
+    print("calculating user preference vector...")
+    user_vector = get_user_preference_from_db(user_id)
+    if user_vector is None:
+        print("something went wrong getting user vector from db?")
+        print("have you swiped any/enough images?")
+        return {"status": "no_profile", "message": f"No user profile found for user_id {user_id}"}
 
     # user_vector = np.load("users/user_prefs_louis.npy")
     #cosime similary with keykwords phrases - keywords_topktopk_phrases_for_user()
