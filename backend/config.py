@@ -42,7 +42,7 @@ MODEL_ID = "openai/clip-vit-base-patch32"  # 512-dim CLIP
 # -----------------------
 LIKE_BASE = 0.30
 SWIPE_FAST = -0.10
-DWELL_THRESHOLD = 3.0
+DWELL_THRESHOLD = 6.0
 DWELL_BONUS = 0.10  # used for swipes only (NOT likes)
 
 # -----------------------
