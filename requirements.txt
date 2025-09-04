@@ -16,3 +16,9 @@ faiss-cpu
 pillow
 requests
 tqdm
+
+#backend requirements
+fastapi
+uvicorn
+#?
+gcsfs
