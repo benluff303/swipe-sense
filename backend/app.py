@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List, Tuple, Dict
 import random, json
 from io import BytesIO
+import time
 
 import numpy as np
 from PIL import Image
@@ -213,6 +214,7 @@ def startup_event():
         recent_k=RECENT_K_DEFAULT, recent_weight=RECENT_W_DEFAULT,
         focus_gamma=FOCUS_GAMMA_DEFAULT, diversity_last_k=DIVERSITY_LAST_K_DEFAULT, diversity_min_cos=DIVERSITY_MIN_COS_DEFAULT,
         hide_exact_dupes=None
+        rng=np.random.default_rng(int(time.time()))
     )
 
 
