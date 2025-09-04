@@ -111,19 +111,13 @@ def get_user_preference_from_db(user_id: str):
     w = float(ent.get("accum_weight", 0.0))
     if s.size == rec.D and w > 0:
         pref = l2_normalize(s / max(w, 1e-9))
+        print(f'get_user_preference_from_db output: {pref}')
         return pref
     return None
 
 # ---------------------------
 # Startup: build the batch pipeline
 # ---------------------------
-
-@app.get("/reset_user_prefs")
-def reset_user_prefs():
-    global user_db
-    user_db = {}
-    print("user preferences have been reset")
-    return {'reset': 'done'}
 
 
 
@@ -132,7 +126,7 @@ def reset_user_prefs():
 def startup_event():
     global paths, meta, ahash_groups, E, Q_NORM, rec, user_db
 
-    random.seed(SEED); np.random.seed(SEED)
+    # random.seed(SEED); np.random.seed(SEED)
     print("starting up")
     # 1) Discover dataset
     if USE_GCS:
@@ -320,6 +314,14 @@ def get_user_profile(user_id: str, save=True):
         return {"status": "no_profile", "preference": None}
 
 
+
+@app.get("/reset_user_prefs")
+def reset_user_prefs():
+    global user_db
+    user_db = {}
+    save_user_db(user_db)
+    print("user preferences have been reset")
+    return {'reset': 'done'}
 
 
 @app.get("/user_to_keywords")
