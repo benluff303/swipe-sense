@@ -53,7 +53,7 @@ def topk_phrases_for_user(
 ) -> Union[pd.DataFrame, List[str]]:
 
     # user_pref_vec = np.load("user_vec.npy")
-    df = topk_phrases_for_user(user_pref_vec)
+    # df = topk_phrases_for_user(user_pref_vec)
 
     """
     Inputs:  user_pref_vec shape (512,) or (1,512); artifacts from cfg.

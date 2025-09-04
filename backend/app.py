@@ -38,8 +38,8 @@ from backend.quality import (
 )
 from backend.utils import l2_normalize
 
-from keywords_topk import topk_phrases_for_user
-from location_ranker import rank_locations_for_phrases
+# from keywords_topk import topk_phrases_for_user
+# from location_ranker import rank_locations_for_phrases
 
 # ---------------------------
 # Global runtime state
@@ -311,8 +311,8 @@ def get_user_profile(user_id: str, save=True):
 
 
 
-@app.get("/user_to_keywords/{user_id}")
-def run_flow_from_user_vector(use_local_npy = False, user_id="louis"):
+@app.get("/user_to_keywords")
+def run_flow_from_user_vector(user_id: str = "louis", use_local_npy: bool = False):
     print("running user vector flow with user:", user_id)
     #TODO make this live swipe info
     #get user vector from local file (ideally will get new vector)
