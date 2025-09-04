@@ -225,7 +225,7 @@ class Feedback(BaseModel):
 # Helpers
 # ---------------------------
 def compute_feedback_value(action: str, dwell_seconds: float | None) -> float:
-    from config import LIKE_BASE, SWIPE_FAST, DWELL_THRESHOLD, DWELL_BONUS
+    from backend.config import LIKE_BASE, SWIPE_FAST, DWELL_THRESHOLD, DWELL_BONUS
     base = LIKE_BASE if action == "like" else SWIPE_FAST
     # dwell bonus only for swipes (NOT likes)
     if action != "like" and dwell_seconds is not None and dwell_seconds >= DWELL_THRESHOLD:
