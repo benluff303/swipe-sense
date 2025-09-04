@@ -121,6 +121,8 @@ def get_user_preference_from_db(user_id: str):
 def startup_event():
     global paths, meta, ahash_groups, E, Q_NORM, rec, user_db
 
+    user_db = {}  # Reset all user preferences on startup
+
     random.seed(SEED); np.random.seed(SEED)
     print("starting up")
     # 1) Discover dataset
