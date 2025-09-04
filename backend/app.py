@@ -10,6 +10,8 @@ import numpy as np
 from PIL import Image
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
+from backend.src.keywords_topk import topk_phrases_for_user
+from backend.src.location_ranker import rank_locations_for_phrases
 
 from backend.config import (
     USE_GCS, GCS_BUCKET, GCS_PREFIX, LOCAL_DIRS, MAX_IMAGES, SEED,
