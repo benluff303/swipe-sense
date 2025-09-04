@@ -12,6 +12,15 @@ import pandas as pd
 
 ReturnType = Literal["df", "list"]
 
+# def _load_user_vec_from_api(user_id: str, api_url: str = "http://localhost:8000") -> np.ndarray:
+#     resp = requests.get(f"{api_url}/user_profile/{user_id}", params={"save": "false"})
+#     data = resp.json()
+#     arr = np.array(data["preference"], dtype=np.float32)
+#     if arr.ndim == 1:
+#         arr = arr[None, :]
+#     return arr
+
+
 
 @dataclass(frozen=True)
 
@@ -43,8 +52,8 @@ def topk_phrases_for_user(
     return_type: ReturnType = "df",
 ) -> Union[pd.DataFrame, List[str]]:
 
-    #user_pref_vec = np.load("user_vec.npy")
-    #df = topk_phrases_for_user(user_pref_vec)
+    # user_pref_vec = np.load("user_vec.npy")
+    df = topk_phrases_for_user(user_pref_vec)
 
     """
     Inputs:  user_pref_vec shape (512,) or (1,512); artifacts from cfg.
