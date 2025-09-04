@@ -3,5 +3,6 @@ COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 RUN pip install .
 COPY backend/ backend
+COPY emb_cache_20k/ emb_cache_20k
 # WORKDIR "backend"
 CMD uvicorn backend.app:app --port $PORT --host 0.0.0.0
