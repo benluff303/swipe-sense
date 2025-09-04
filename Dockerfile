@@ -1,6 +1,6 @@
-FROM pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
+FROM python:3.12-slim
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install .
 COPY backend/ backend
 # WORKDIR "backend"
-CMD uvicorn app:app --port $PORT --host 0.0.0.0
+CMD uvicorn backend.app:app --port $PORT --host 0.0.0.0
